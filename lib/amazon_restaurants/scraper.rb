@@ -1,5 +1,4 @@
 class Scraper
-
   def scrape_page(html = 'https://www.amazon.com/restaurants?')
     doc = Nokogiri::HTML(open(html))
   end
@@ -23,10 +22,11 @@ class Scraper
       new_name = name.split(" & ").join("-and-")
     elsif name == "cajun & creole" || name == "persian & iranian"
       new_name = name.split(" & ").join("-")
+    elsif name == "salads"
+      new_name = name.chop
     else
       new_name = name.split(" ").join("-")
     end
-
     detail_array = []
     counter = 0
     scrape_page("https://www.amazon.com/restaurants/delivery/#{new_name}?").search(".hw-grid-card-list-item-desc").each do |details|

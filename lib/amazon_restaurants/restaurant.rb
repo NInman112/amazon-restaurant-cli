@@ -1,25 +1,21 @@
 class Restaurant
   extend Findable
+  extend Printable::ClassMethods
+  extend Printable::InstanceMethods
   attr_accessor :name, :category, :rating, :price
   @@all = []
 
-  def initialize(restaurant_hash)
+  def initialize(restaurant_hash)  #currently not called upon, capable of creating new restaurants
     restaurant_hash.each {|key, value| self.send("#{key}=",value)}
     @@all << self
   end
 
-  def self.create_from_collection(restaurant_array)
+  def self.create_from_collection(restaurant_array) #currently not called upon, capable of creating new restaurants from arrays
       restaurant_array.each {|rest| self.new(rest)}
   end
 
   def self.all
     @@all
-  end
-
-  def self.print
-    @@all.each.with_index(1) do |restaurant, index|
-      puts "#{index}. #{restaurant.name}, #{restaurant.category}, #{restaurant.rating}, #{restaurant.price}"
-    end
   end
 
   def self.delete

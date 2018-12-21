@@ -1,5 +1,7 @@
 class Cusines
   extend Findable
+  extend Printable::ClassMethods
+  extend Printable::InstanceMethods
   attr_accessor :name
   @@all = []
 
@@ -8,14 +10,8 @@ class Cusines
     @@all << self
   end
 
-  def self.all
-    @@all
-  end
-
-  def self.print
-    @@all.each.with_index(1) do |cusine, index|
-      puts "#{index}. #{cusine.name}"
-    end
-  end
+   def self.all
+     @@all
+   end
 
 end
