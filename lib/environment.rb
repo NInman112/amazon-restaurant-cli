@@ -1,6 +1,7 @@
 require 'pry'
 require 'nokogiri'
 require 'open-uri'
+require 'colorize'
 
 require_relative './amazon_restaurants/concerns/findable'
 require_relative './amazon_restaurants/version'

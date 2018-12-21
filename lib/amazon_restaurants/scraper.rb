@@ -2,7 +2,6 @@ class Scraper
 
   def scrape_page(html = 'https://www.amazon.com/restaurants?')
     doc = Nokogiri::HTML(open(html))
-    #doc.css('.hw-asin-grid.aok-clearfix').css('.hw-grid-item.hw-city-list-grid-item').css('.hw-grid-card').css('.hw-city-grid-card-list-item-inner').css('.a-row.hw-city-grid-card-hover').css('.a-size-base-plus').text
   end
 
   def scrape_cities
@@ -19,10 +18,18 @@ class Scraper
     end
   end
 
-  def scrape_details(city)
+  def scrape_details(name)
+    if name == "breakfast & brunch" || name == "juice Bars & smoothies"
+      new_name = name.split(" & ").join("-and-")
+    elsif name == "cajun & creole" || name == "persian & iranian"
+      new_name = name.split(" & ").join("-")
+    else
+      new_name = name.split(" ").join("-")
+    end
+
     detail_array = []
     counter = 0
-    scrape_page("https://www.amazon.com/restaurants/delivery/#{city}?").search(".hw-grid-card-list-item-desc").each do |details|
+    scrape_page("https://www.amazon.com/restaurants/delivery/#{new_name}?").search(".hw-grid-card-list-item-desc").each do |details|
       detail_array << {
         :name => details.css(".a-size-base.a-color-base.a-text-ellipsis.hw-grid-card-hover-title.a-text-bold").text,
         :category => details.css(".hw-grid-card-subcat.a-text-ellipsis").text.strip,
