@@ -23,13 +23,28 @@ class CLI
 
   def city_select
     Scraper.new.scrape_cities
-    Cities.print
     loop do
-      puts "Please make a selection, or enter 0 to go back:"
+      Cities.print
+      puts 'Please make a selection, or enter 0 to go back:'
       input = gets.chomp
+      name = Cities.all[input.to_i - 1].name.downcase
+      if name == "las vegas, nv"
+        name = "las-vegas, zz"
+      elsif name == "los angeles and orange county, ca"
+        name = "los-angeles, zz"
+      elsif name == "manhattan and brooklyn, ny"
+        name = "new-york, zz"
+      elsif name == "san diego"
+        name = "san-diego, zz"
+      elsif name == "washington, d.c. area"
+        name = "washington-dc, zz"
+      end
       case input.to_i
       when 1..20
-        Scraper.new.scrape_details(Cities.all[input.to_i - 1].name.split(", ")[0].downcase)
+        new_restaurants = Scraper.new.scrape_details(name.split(", ")[0])
+        Restaurant.create_from_collection(new_restaurants)
+        Restaurant.print
+        Restaurant.delete
       when 0
         menu
       end

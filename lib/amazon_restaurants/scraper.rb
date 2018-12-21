@@ -30,11 +30,11 @@ class Scraper
         :price => details.css(".alr-price-tier-value").text
       }
       counter += 1
-      if counter == 5
+      if counter == 10
         break
       end
-      binding.pry
     end
+    detail_array
   end
 
 end
