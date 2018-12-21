@@ -18,8 +18,9 @@ class CLI
         exit
       when 'cusine'
         cusine_search
-      when '1'
-        puts "Hello, you pushed #{Cities.all[input.to_i].name}."
+      when '(1..20)'
+        puts "Hello, you pushed #{Cities.all[input.to_i - 1].name}."
+        Scraper.new.scrape_details('atlanta')
       when '2'
         puts "Hello, you pushed #{Cities.all[input.to_i].name}."
       when '3'
