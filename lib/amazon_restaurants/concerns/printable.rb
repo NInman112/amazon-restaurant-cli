@@ -11,8 +11,8 @@ module Printable
 
   module ClassMethods
     def print
-      all.each.with_index(1) do |cusine, index|
-        puts "#{index}. #{cusine.name}"
+      all.each.with_index(1) do |data, index|
+        puts "#{index}. #{data.name}"
       end
     end
   end

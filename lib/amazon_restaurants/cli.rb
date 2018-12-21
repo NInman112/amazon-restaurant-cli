@@ -9,14 +9,14 @@ class CLI
 
   def menu
     loop do
-      puts "Please type 'cusine' to search cusines, 'city' to select a city or 'exit':".colorize(:red)
+      puts "Please type 'cuisine' to search cuisines, 'city' to select a city or 'exit':".colorize(:red)
       input = gets.chomp
       case input.downcase
       when 'exit'
         puts 'Exiting the program...'
         exit
-      when 'cusine'
-        cusine_search
+      when 'cuisine'
+        cuisine_search
       when 'city'
         city_select
       when 'test'
@@ -57,11 +57,11 @@ class CLI
       input = gets.chomp
       input.downcase
 
-      if Cusines.find_by_name(input)!= nil
-        puts "#{Cusines.find_by_name(input).name} cusine:".colorize(:blue)
-        Cusines.print_details(input)
+      if Cuisines.find_by_name(input)!= nil
+        puts "#{Cuisines.find_by_name(input).name} cuisine:".colorize(:blue)
+        Cuisines.print_details(input)
       elsif input == 'list'
-        Cusines.print
+        Cuisines.print
       elsif input == 'menu'
         menu
       else
