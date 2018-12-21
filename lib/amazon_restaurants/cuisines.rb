@@ -1,4 +1,4 @@
-class Cusines
+class Cuisines
   extend Findable
   extend Printable::ClassMethods
   extend Printable::InstanceMethods

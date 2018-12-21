@@ -3,7 +3,7 @@ class CLI
     puts 'Find local restaurants available through Amazon Restaurants!'.colorize(:green)
     puts "Loading additional data....  please wait a moment..".colorize(:red)
     Scraper.new.scrape_cities
-    Scraper.new.scrape_cusines
+    Scraper.new.scrape_cuisines
     menu
   end
 
@@ -51,7 +51,7 @@ class CLI
     end
   end
 
-  def cusine_search
+  def cuisine_search
     loop do
       puts "Please enter your desired cusine,'list' to see available cusines, or 'menu' to return to the main menu:".colorize(:red)
       input = gets.chomp

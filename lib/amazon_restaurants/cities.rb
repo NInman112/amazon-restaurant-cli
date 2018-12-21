@@ -1,5 +1,7 @@
 class Cities
   extend Findable
+  extend Printable::ClassMethods
+  extend Printable::InstanceMethods
   attr_accessor :name
 
   @@all = []
@@ -12,11 +14,5 @@ class Cities
   def self.all
     @@all
   end
-
-  def self.print
-    @@all.each.with_index(1) do |city, index|
-      puts "#{index}. #{city.name}"
-    end
-  end
-
+  
 end

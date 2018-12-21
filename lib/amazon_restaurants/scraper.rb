@@ -11,7 +11,7 @@ class Scraper
     end
   end
 
-  def scrape_cusines
+  def scrape_cuisines
     scrape_page.search(".a-link-normal.hw-seo-page-footer-links").each do |cuisine|
       Cuisines.new(cuisine.text)
     end
