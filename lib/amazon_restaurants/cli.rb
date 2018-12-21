@@ -6,11 +6,8 @@ class CLI
   end
 
   def menu
-    Scraper.new.scrape_cities
-    Cities.print
-    #binding.pry
     loop do
-      puts "Please make a selection or type 'cusine' to search or 'exit':"
+      puts "Please type 'cusine' to search cusines, 'city' to select a city or 'exit':"
       input = gets.chomp
       case input.downcase
       when 'exit'
@@ -18,15 +15,23 @@ class CLI
         exit
       when 'cusine'
         cusine_search
-      when '(1..20)'
-        puts "Hello, you pushed #{Cities.all[input.to_i - 1].name}."
-        Scraper.new.scrape_details('atlanta')
-      when '2'
-        puts "Hello, you pushed #{Cities.all[input.to_i].name}."
-      when '3'
-        puts "Hello, you pushed #{Cities.all[input.to_i].name}."
-      when '4'
-        puts "Hello, you pushed #{Cities.all[input.to_i].name}."
+      when  'city'
+        city_select
+      end
+    end
+  end
+
+  def city_select
+    Scraper.new.scrape_cities
+    Cities.print
+    loop do
+      puts "Please make a selection, or enter 0 to go back:"
+      input = gets.chomp
+      case input.to_i
+      when 1..20
+        Scraper.new.scrape_details(Cities.all[input.to_i - 1].name.split(", ")[0].downcase)
+      when 0
+        menu
       end
     end
   end

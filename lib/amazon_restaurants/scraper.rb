@@ -20,12 +20,19 @@ class Scraper
   end
 
   def scrape_details(city)
-    detail_hash = {}
+    detail_array = []
+    counter = 0
     scrape_page("https://www.amazon.com/restaurants/delivery/#{city}?").search(".hw-grid-card-list-item-desc").each do |details|
-      name = details.css(".a-size-base.a-color-base.a-text-ellipsis.hw-grid-card-hover-title.a-text-bold").text
-      category = details.css(".hw-grid-card-subcat.a-text-ellipsis").text.strip
-      rating = details.css(".a-icon-alt").text
-      price = details.css(".alr-price-tier-value").text
+      detail_array << {
+        :name => details.css(".a-size-base.a-color-base.a-text-ellipsis.hw-grid-card-hover-title.a-text-bold").text,
+        :category => details.css(".hw-grid-card-subcat.a-text-ellipsis").text.strip,
+        :rating => details.css(".a-icon-alt").text,
+        :price => details.css(".alr-price-tier-value").text
+      }
+      counter += 1
+      if counter == 5
+        break
+      end
       binding.pry
     end
   end
