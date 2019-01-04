@@ -18,7 +18,7 @@ class Scraper
   end
 
   def scrape_details(name)
-    if name == "breakfast & brunch" || name == "juice Bars & smoothies"
+    if name == "breakfast & brunch" || name == "juice bars & smoothies"
       new_name = name.split(" & ").join("-and-")
     elsif name == "cajun & creole" || name == "persian & iranian"
       new_name = name.split(" & ").join("-")
